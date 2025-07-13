@@ -33,7 +33,7 @@ The sample demonstrates the new Aspire interaction service by implementing a cus
 
 ## Key Components
 
-### Custom Command Implementation (`ServiceBusExtensions.cs`)
+### Custom Command Implementation [`ServiceBusExtensions.cs`](PubSubDemo.AppHost/ServiceBusExtensions.cs)
 The `WithCommands()` extension method adds an interactive "Publish Message" command that:
 - Uses the `IInteractionService` to create a custom UI
 - Provides dropdown selection for available queues
