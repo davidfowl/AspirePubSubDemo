@@ -52,8 +52,18 @@ The `WithCommands()` extension method adds an interactive "Publish Message" comm
 
 ### Install the Aspire CLI
 
+https://github.com/dotnet/aspire/blob/main/docs/using-latest-daily.md#install-the-daily-cli
+
+Windows
+
+```ps1
+iex "& { $(irm https://aka.ms/aspire/get/install.ps1) } -Quality dev"
 ```
-dotnet tool install --global aspire.cli --prerelease --source https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet9/nuget/v3/index.json
+
+Linux/Mac
+
+```bash
+curl -sSL https://aka.ms/aspire/get/install.sh | bash -s -- -q dev
 ```
 
 ## Key Learning Points
