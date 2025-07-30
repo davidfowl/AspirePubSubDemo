@@ -1,10 +1,10 @@
-# PubSubDemo - Azure Service Bus with .NET Aspire Interactive Commands
+# PubSubDemo - Azure Service Bus with Aspire Interactive Commands
 
-This sample demonstrates how to use the new interaction service in .NET Aspire to build custom commands with custom UI. The example shows how to add a command that can send messages to an Azure Service Bus emulator with an interactive prompt.
+This sample demonstrates how to use the new interaction service in Aspire to build custom commands with custom UI. The example shows how to add a command that can send messages to an Azure Service Bus emulator with an interactive prompt.
 
 ## Overview
 
-Using the new interaction service coming in the next version of .NET Aspire, it's now trivial to build custom commands that prompt with custom UI. This sample includes:
+Using the new interaction service coming in the next version of Aspire, it's now trivial to build custom commands that prompt with custom UI. This sample includes:
 
 - **AppHost**: Orchestrates the Azure Service Bus emulator and worker service
 - **WorkerService**: Processes messages from the Service Bus queue
@@ -17,9 +17,9 @@ graph LR
     A[Aspire Dashboard<br/>Custom Command<br/>'Publish Message'] --> B[Azure Service Bus<br/>Emulator<br/>- my-queue<br/>- dead-letter-queue]
     B --> C[Worker Service<br/>Message Processor]
     
-    style A fill:#e1f5fe
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
+    style A fill:#2196F3,stroke:#1976D2,stroke-width:2px,color:#fff
+    style B fill:#FF9800,stroke:#F57C00,stroke-width:2px,color:#fff
+    style C fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:#fff
 ```
 
 ## Features
@@ -111,6 +111,6 @@ Use this pattern to create other interactive commands for:
 
 ## Resources
 
-- [.NET Aspire Documentation](https://learn.microsoft.com/en-us/dotnet/aspire/)
+- [Aspire Documentation](https://learn.microsoft.com/en-us/dotnet/aspire/)
 - [Azure Service Bus Documentation](https://learn.microsoft.com/en-us/azure/service-bus-messaging/)
 - [Worker Services in .NET](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers)
