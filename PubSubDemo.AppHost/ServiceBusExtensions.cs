@@ -1,7 +1,5 @@
-using System.Reflection;
 using Aspire.Hosting.Azure;
 using Azure.Messaging.ServiceBus;
-using k8s.Models;
 using Microsoft.Extensions.DependencyInjection;
 #pragma warning disable ASPIREINTERACTION001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 public static class ServiceBusExtensions
