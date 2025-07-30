@@ -1,14 +1,12 @@
 # PubSubDemo - Azure Service Bus with Aspire Interactive Commands
 
-This sample demonstrates how to use the new interaction service in Aspire to build custom commands with custom UI. The example shows how to add a command that can send messages to an Azure Service Bus emulator with an interactive prompt.
+This sample demonstrates how to use Aspire's interaction service to build custom commands with interactive UI. It shows how to send messages to an Azure Service Bus emulator through a custom command in the Aspire dashboard.
 
-## Overview
-
-Using the new interaction service coming in the next version of Aspire, it's now trivial to build custom commands that prompt with custom UI. This sample includes:
+## Components
 
 - **AppHost**: Orchestrates the Azure Service Bus emulator and worker service
-- **WorkerService**: Processes messages from the Service Bus queue
-- **Custom Interactive Command**: Allows sending messages to the Service Bus through the Aspire dashboard
+- **WorkerService**: Processes messages from the Service Bus queue  
+- **Interactive Command**: Send messages to Service Bus through the Aspire dashboard
 
 ## Architecture
 
@@ -22,95 +20,44 @@ graph LR
     style C fill:#9C27B0,stroke:#7B1FA2,stroke-width:2px,color:#fff
 ```
 
-## Features
-
-### Interactive Command UI
-The sample demonstrates the new Aspire interaction service by implementing a custom command that:
-- Prompts the user with a dropdown to select a queue
-- Provides a text input for the message content
-- Sends the message to the selected Service Bus queue
-- Provides visual feedback with success/error states
-
-## Key Components
-
-### Custom Command Implementation [`ServiceBusExtensions.cs`](PubSubDemo.AppHost/ServiceBusExtensions.cs)
-The `WithCommands()` extension method adds an interactive "Publish Message" command that:
-- Uses the `IInteractionService` to create a custom UI
-- Provides dropdown selection for available queues
-- Includes a text input for message content
-- Handles the message sending logic with proper error handling
-
 ## Getting Started
 
-## Usage
+### Requirements
+- **.NET 9 SDK** - https://dotnet.microsoft.com/en-us/download
+- **Docker** - https://www.docker.com/get-started/
+- **Aspire CLI** - https://learn.microsoft.com/en-us/dotnet/aspire/cli/install
 
-### Development Machine Requirements
+### Install Aspire CLI
 
-- **.NET 8 SDK** - https://dotnet.microsoft.com/en-us/download
-- **Docker Desktop** or Docker CLI - https://www.docker.com/get-started/
-- **Aspire CLI (Nightly)**: Follow the installation guide at https://github.com/dotnet/aspire/blob/main/docs/using-latest-daily.md#install-the-daily-cli
-
-### Install the Aspire CLI
-
-https://github.com/dotnet/aspire/blob/main/docs/using-latest-daily.md#install-the-daily-cli
-
-Windows
-
+**Windows:**
 ```ps1
-iex "& { $(irm https://aka.ms/aspire/get/install.ps1) } -Quality dev"
+iex "& { $(irm https://aka.ms/aspire/get/install.ps1) }"
 ```
 
-Linux/Mac
-
+**Linux/Mac:**
 ```bash
-curl -sSL https://aka.ms/aspire/get/install.sh | bash -s -- -q dev
+curl -sSL https://aka.ms/aspire/get/install.sh | bash
 ```
 
-## Key Learning Points
+## Key Features
 
-### Interaction Service Usage
-This sample showcases the new Aspire interaction service (`IInteractionService`) which enables:
-- **Custom UI Components**: Create dropdown menus, text inputs, and other form elements
-- **Resource Integration**: Access resource properties and connection strings
-- **Command Integration**: Add commands that appear in the Aspire dashboard
-- **User Experience**: Provide intuitive ways to interact with your distributed application
-
-### Service Bus Integration
-- **Emulator Support**: Run Azure Service Bus locally for development
-- **Queue Management**: Programmatically create and manage queues
-- **Connection Handling**: Proper connection string management through Aspire
-- **Message Processing**: Robust message handling with error management
+The interactive command demonstrates:
+- Dropdown selection for available queues
+- Text input for message content
+- Visual feedback with success/error states
+- Integration with Aspire's `IInteractionService`
 
 ## Customization
 
-### Adding More Queues
-To add additional queues, modify the `AppHost.cs`:
+Add more queues in `AppHost.cs`:
 ```csharp
 serviceBus.AddServiceBusQueue("new-queue");
 ```
 
-### Extending the Command
-The interactive command can be extended to support:
-- Message properties and metadata
-- Different message types (JSON, XML, etc.)
-- Batch message sending
-- Message scheduling
-
-### Custom Commands
-Use this pattern to create other interactive commands for:
-- Database operations
-- API testing
-- Configuration management
-- Monitoring and diagnostics
-
-## Notes
-
-- The interaction service API is currently in preview and subject to change
-- The sample uses reflection to access internal Aspire properties (see comments in `ServiceBusExtensions.cs`)
-- The Service Bus emulator provides a local development environment without requiring Azure resources
-
 ## Resources
 
 - [Aspire Documentation](https://learn.microsoft.com/en-us/dotnet/aspire/)
+- [Aspire Interaction Service](https://learn.microsoft.com/en-us/dotnet/aspire/extensibility/interaction-service)
+- [Custom Resource Commands](https://learn.microsoft.com/en-us/dotnet/aspire/fundamentals/custom-resource-commands)
 - [Azure Service Bus Documentation](https://learn.microsoft.com/en-us/azure/service-bus-messaging/)
 - [Worker Services in .NET](https://learn.microsoft.com/en-us/dotnet/core/extensions/workers)
