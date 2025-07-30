@@ -1,17 +1,13 @@
 using System.Reflection;
 using Aspire.Hosting.Azure;
 using Azure.Messaging.ServiceBus;
+using k8s.Models;
 using Microsoft.Extensions.DependencyInjection;
 #pragma warning disable ASPIREINTERACTION001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
 public static class ServiceBusExtensions
 {
     public static IResourceBuilder<AzureServiceBusResource> WithCommands(this IResourceBuilder<AzureServiceBusResource> builder)
     {
-        // This property isn't public, so we use reflection to access it
-        // See https://github.com/dotnet/aspire/issues/10367
-        var queuesProperty = typeof(AzureServiceBusResource).GetProperty("Queues", BindingFlags.NonPublic | BindingFlags.Instance) ??
-            throw new InvalidOperationException("Could not find 'Queues' property on AzureServiceBusResource.");
-
         return builder.OnInitializeResource((r, evt, ct) =>
         {
             // Add the command to each queue resource
@@ -21,8 +17,12 @@ public static class ServiceBusExtensions
                 return Task.CompletedTask;
             }
 
-            var queues = (queuesProperty.GetValue(builder.Resource) as List<AzureServiceBusQueueResource> ?? [])
-                        .ToDictionary(q => q.Name);
+            // The queues property isn't public, so work around it
+            // See https://github.com/dotnet/aspire/issues/10367
+            var model = evt.Services.GetRequiredService<DistributedApplicationModel>();
+            var queues = model.Resources.OfType<AzureServiceBusQueueResource>()
+            .Where(q => q.Parent == r)
+            .ToDictionary(q => q.Name);
 
             if (queues.Count == 0)
             {
